@@ -1,0 +1,6 @@
+timeout   3
+default   0
+
+title  Brik.OS Project | DevelopOS | A1 v0.1
+root   (hd0,0)
+kernel /kernel.bin
