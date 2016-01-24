@@ -1,6 +1,0 @@
-timeout   3
-default   0
-
-title  DevelopOS
-root   (hd0,0)
-kernel /kernel.bin
