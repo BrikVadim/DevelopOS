@@ -6,7 +6,12 @@ OBJFILES = \
 	loader.o  \
 	common/printf.o  \
 	common/screen.o  \
-	kernel.o
+	common/pci.o  \
+	common/string.o \
+	kernel.o \
+	common/callrealmode.o \
+	common/callrealmode_asm.o \
+	common/descriptor.o 
 
 image:
 	@echo "Создание образа (hdd.img)..."
@@ -46,7 +51,7 @@ image:
 all: kernel.bin
 rebuild: clean all
 .s.o:
-	as -o $@ $<
+	as -I include -o $@ $<
 .c.o:
 	$(CC) -Iinclude $(CFLAGS) -o $@ -c $<
 kernel.bin: $(OBJFILES)

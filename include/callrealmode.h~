@@ -1,0 +1,7 @@
+#ifndef _CALLREALMODE_H
+#define _CALLREALMODE_H
+
+#include "types.h"
+
+u64 GetAvalibleRAMSize();
+#endif
