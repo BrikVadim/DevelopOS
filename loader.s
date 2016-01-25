@@ -19,7 +19,7 @@ loader:
 	movl $(stack + STACKSIZE), %esp
 	movl %eax, magic
 	movl %ebx, mbd
-	call main
+	call kernel_main
 	cli
 hang:
 	hlt
