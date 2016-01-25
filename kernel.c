@@ -18,7 +18,7 @@ struct segdesc g_GDT[5];
 
 void SetupDescTables(struct segdesc *GDT_base);
 
-void main(void) {
+int kernel_main(struct multiboot *mboot_ptr) {
 	clear_screen();
 	printf(">>> Brik.OS Project\n>>  DevelopOS A1 v0.1\n>Brik Vadim @ Brik Inc.\n\n");
 
@@ -30,4 +30,5 @@ void main(void) {
     
 	u64 ram_size = GetAvalibleRAMSize ();
 	printf("\nram_size = %llu(%lluMb)\n", ram_size, (ram_size / 0x100000) + 1);
+	return 0xDEADBABA;
 }
