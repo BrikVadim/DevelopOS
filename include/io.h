@@ -51,23 +51,34 @@ enum core_io_prio {
 
 typedef int (*core_io_handler_t) (core_io_t ioaddr, union mem *data, void *arg);
 
-static inline void in8 (ioport_t port, u8 *data)
-{ asm volatile ("inb %%dx, %%al" : "=a" (*data) : "d" (port)); }
-static inline void in16 (ioport_t port, u16 *data)
-{ asm volatile ("inw %%dx, %%ax" : "=a" (*data) : "d" (port)); }
-static inline void in32 (ioport_t port, u32 *data)
-{ asm volatile ("inl %%dx, %%eax" : "=a" (*data) : "d" (port)); }
-static inline void ins8 (ioport_t port, u8 *buf, u32 count)
-{ asm volatile ("cld; rep insb" : "=c" (count), "=D" (buf)
-		: "c" (count), "d" (port), "D" (buf)); }
-static inline void ins16 (ioport_t port, u16 *buf, u32 count)
-{ asm volatile ("cld; rep insw" : "=c" (count), "=D" (buf)
-		: "c" (count), "d" (port), "D" (buf)); }
-static inline void ins32 (ioport_t port, u32 *buf, u32 count)
-{ asm volatile ("cld; rep insl" : "=c" (count), "=D" (buf)
-		: "c" (count), "d" (port), "D" (buf)); }
-static inline void insn (ioport_t port, void *buf, int unit_size, u32 total_size)
-{
+static inline void in8 (ioport_t port, u8 *data) { 
+	asm volatile ("inb %%dx, %%al" : "=a" (*data) : "d" (port)); 
+}
+
+static inline void in16 (ioport_t port, u16 *data) { 
+	asm volatile ("inw %%dx, %%ax" : "=a" (*data) : "d" (port)); 
+}
+
+static inline void in32 (ioport_t port, u32 *data) { 
+	asm volatile ("inl %%dx, %%eax" : "=a" (*data) : "d" (port)); 
+}
+
+static inline void ins8 (ioport_t port, u8 *buf, u32 count) { 
+	asm volatile ("cld; rep insb" : "=c" (count), "=D" (buf)
+		: "c" (count), "d" (port), "D" (buf)); 
+}
+
+static inline void ins16 (ioport_t port, u16 *buf, u32 count) { 
+	asm volatile ("cld; rep insw" : "=c" (count), "=D" (buf)
+		: "c" (count), "d" (port), "D" (buf)); 
+}
+
+static inline void ins32 (ioport_t port, u32 *buf, u32 count) { 
+	asm volatile ("cld; rep insl" : "=c" (count), "=D" (buf)
+		: "c" (count), "d" (port), "D" (buf)); 
+}
+
+static inline void insn (ioport_t port, void *buf, int unit_size, u32 total_size) {
 	if (unit_size == 4)
 		ins32 (port, buf, total_size/4);
 	else if (unit_size == 2)
@@ -76,23 +87,34 @@ static inline void insn (ioport_t port, void *buf, int unit_size, u32 total_size
 		ins8 (port, buf, total_size);
 }
 
-static inline void out8 (ioport_t port, u8 data)
-{ asm volatile ("outb %%al, %%dx" : : "a" (data), "d" (port)); }
-static inline void out16 (ioport_t port, u16 data)
-{ asm volatile ("outw %%ax, %%dx" : : "a" (data), "d" (port)); }
-static inline void out32 (ioport_t port, u32 data)
-{ asm volatile ("outl %%eax, %%dx" : : "a" (data), "d" (port)); }
-static inline void outs8 (ioport_t port, u8 *buf, u32 count)
-{ asm volatile ("cld; rep outsb" : "=c" (count), "=S" (buf)
-		: "c" (count), "d" (port), "S" (buf)); }
-static inline void outs16 (ioport_t port, u16 *buf, u32 count)
-{ asm volatile ("cld; rep outsw" : "=c" (count), "=S" (buf)
-		: "c" (count), "d" (port), "S" (buf)); }
-static inline void outs32 (ioport_t port, u32 *buf, u32 count)
-{ asm volatile ("cld; rep outsl" : "=c" (count), "=S" (buf)
-		: "c" (count), "d" (port), "S" (buf)); }
-static inline void outsn (ioport_t port, void *buf, int unit_size, u32 total_size)
-{
+static inline void out8 (ioport_t port, u8 data) { 
+	asm volatile ("outb %%al, %%dx" : : "a" (data), "d" (port)); 
+}
+
+static inline void out16 (ioport_t port, u16 data) { 
+	asm volatile ("outw %%ax, %%dx" : : "a" (data), "d" (port)); 
+}
+
+static inline void out32 (ioport_t port, u32 data) { 
+	asm volatile ("outl %%eax, %%dx" : : "a" (data), "d" (port)); 
+}
+
+static inline void outs8 (ioport_t port, u8 *buf, u32 count) { 
+	asm volatile ("cld; rep outsb" : "=c" (count), "=S" (buf)
+		: "c" (count), "d" (port), "S" (buf)); 
+}
+
+static inline void outs16 (ioport_t port, u16 *buf, u32 count) { 
+	asm volatile ("cld; rep outsw" : "=c" (count), "=S" (buf)
+		: "c" (count), "d" (port), "S" (buf)); 
+}
+
+static inline void outs32 (ioport_t port, u32 *buf, u32 count) { 
+	asm volatile ("cld; rep outsl" : "=c" (count), "=S" (buf)
+		: "c" (count), "d" (port), "S" (buf)); 
+}
+
+static inline void outsn (ioport_t port, void *buf, int unit_size, u32 total_size) {
 	if (unit_size == 4)
 		outs32 (port, buf, total_size/4);
 	else if (unit_size == 2)
