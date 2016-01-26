@@ -14,4 +14,5 @@
 #include "types.h"
 
 u64 GetAvalibleRAMSize();
+
 #endif
