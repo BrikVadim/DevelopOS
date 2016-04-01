@@ -30,5 +30,6 @@ int kernel_main(struct multiboot *mboot_ptr) {
     
 	u64 ram_size = GetAvalibleRAMSize ();
 	printf("\nram_size = %llu(%lluMb)\n", ram_size, (ram_size / 0x100000) + 1);
+	printf("Hallo, Welt!");
 	return 0xDEADBABA;
 }
